@@ -6,27 +6,47 @@
 				<th scope="col">Track</th>
 				<th scope="col">Duration</th>
 				<!--TODO: Use @if to hide if hideArtist is true-->
-				<th scope="col">Primary Artist</th>
+				@if (!hideArtist) {
+					<th scope="col">Primary Artist</th>
+				}	
 				<!--TODO: Use @if to hide if hideAlbum is true-->
-				<th scope="col">Album</th>
+				@if (!hideAlbum) {
+					<th scope="col">Album</th>
+				}
 			</tr>
 		</thead>
 		<tbody>
-			<!--TODO: Use @for to loop over tracks-->
+		<!--TODO: Use @for to loop over tracks-->
+		@for (track of tracks; track track.id; let index = $index) {
 			<tr>
-				<!--TODO: Populate with row index (start with 1!)-->
-				<td>???</td>
+			<!--TODO: Populate with row index (start with 1!)-->
+			<td>{{ index + 1 }}</td>
+			<td>
+				<!--TODO: link to the endpoint for that track, display the track's name-->
+				<a [routerLink]="['/track', track.id]">{{ track.name }}</a>
+			</td>
+			<!--TODO: display the track's duration-->
+			<td>{{ track.durationStr }}</td>
+
+			<!--TODO: Use @if to hide if hideArtist is true; link to the first artist's endpoint and display the first artist's name-->
+			@if (!hideArtist) {
 				<td>
-					<!--TODO: link to the endpoint for that track, display the track's name-->
-					<a>???</a>
+				@if (track.artists[0]; as artist) {
+					<a [routerLink]="['/artist', artist.id]">{{ artist.name }}</a>
+				}
 				</td>
-				<!--TODO: display the track's duration-->
-				<td>???</td>
-				<!--TODO: Use @if to hide if hideArtist is true; link to the first artist's endpoint and display the first artist's name-->
-				<td><a></a></td>
-				<!--TODO: Use @if to hide if hideAlbum is true; link to the album's endpoint and display the album's name-->
-				<td><a></a></td>
+			}
+
+			<!--TODO: Use @if to hide if hideAlbum is true; link to the album's endpoint and display the album's name-->
+			@if (!hideAlbum) {
+				<td>
+				@if (track.album; as album) {
+					<a [routerLink]="['/album', album.id]">{{ album.name }}</a>
+				}
+				</td>
+			}
 			</tr>
+		}
 		</tbody>
 	</table>
 }
