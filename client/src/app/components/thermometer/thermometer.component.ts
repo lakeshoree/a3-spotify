@@ -8,7 +8,10 @@ import { Popularity } from 'src/app/data/popularity';
     standalone: false
 })
 export class ThermometerComponent implements OnInit {
-  //TODO: define Input fields and bind them to the template.
+  //TODO: define Input fields and bind them to the template
+
+  // Receives the popularity score from the page using this component
+  @Input() popularity?: Popularity;
 
   constructor() { }
 

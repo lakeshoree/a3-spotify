@@ -23,6 +23,7 @@ export class SearchComponent implements OnInit {
   ngOnInit() {
   }
 
+  // Searches for the selected cateogory and store the results
   search() {
     this.spotifyService.searchFor(this.searchCategory, this.searchString)
       .then((results) => {
@@ -30,6 +31,7 @@ export class SearchComponent implements OnInit {
       });
   }
 
+  // Return track results for track-list
   get trackResults(): TrackData[] {
     return this.resources.filter(
       (resource): resource is TrackData => resource instanceof TrackData
